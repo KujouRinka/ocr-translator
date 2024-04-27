@@ -20,10 +20,10 @@ type OCRConfig struct {
 }
 
 type TranslatorConfig struct {
-	Type       string `yaml:"type"`
-	APIKey     string `yaml:"api"`
-	TargetLang string `yaml:"target"`
-	SourceLang string `yaml:"source"`
+	Type       string   `yaml:"type"`
+	APIKey     string   `yaml:"api"`
+	TargetLang string   `yaml:"target"`
+	SourceLang []string `yaml:"source"`
 }
 
 type Config struct {

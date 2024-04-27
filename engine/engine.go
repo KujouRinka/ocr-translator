@@ -22,7 +22,7 @@ func NewEngine(cfg *config.RawConfig) (*Engine, error) {
 		case "google":
 			tl, err := translator.NewGoogleTranslator(
 				config.StrToLang(t.TargetLang),
-				config.StrToLang(t.SourceLang),
+				config.StrToLang(t.SourceLang[0]),
 				t.APIKey,
 			)
 			if err != nil {
