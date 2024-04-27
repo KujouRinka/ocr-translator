@@ -1,9 +1,23 @@
 package main
 
 import (
-	"fmt"
+	"github.com/kujourinka/ocr-translator/config"
+	"github.com/kujourinka/ocr-translator/engine"
 )
 
 func main() {
-	fmt.Println("Hello World")
+	cfg, err := config.LoadRawConfig("config/sample_config.yaml")
+	if err != nil {
+		panic(err)
+	}
+
+	e, err := engine.NewEngine(cfg)
+	if err != nil {
+		panic(err)
+	}
+
+	err = e.Run()
+	if err != nil {
+		panic(err)
+	}
 }
