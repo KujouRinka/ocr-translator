@@ -8,6 +8,8 @@ import (
 	"github.com/otiai10/gosseract/v2"
 )
 
+var _ Engine = (*GosseractOcr)(nil)
+
 type GosseractOcr struct {
 	client *gosseract.Client
 }

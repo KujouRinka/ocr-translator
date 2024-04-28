@@ -16,14 +16,15 @@ type RawConfig struct {
 }
 
 type OCRConfig struct {
-	Type string `yaml:"type"`
+	Type string   `yaml:"type"`
+	Lang []string `yaml:"lang"`
 }
 
 type TranslatorConfig struct {
-	Type       string   `yaml:"type"`
-	APIKey     string   `yaml:"api"`
-	TargetLang string   `yaml:"target"`
-	SourceLang []string `yaml:"source"`
+	Type       string `yaml:"type"`
+	APIKey     string `yaml:"api"`
+	TargetLang string `yaml:"target"`
+	SourceLang string `yaml:"source"`
 }
 
 type Config struct {

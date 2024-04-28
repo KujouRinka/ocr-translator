@@ -2,10 +2,12 @@ package engine
 
 import (
 	"fmt"
+	"time"
+
 	"github.com/kujourinka/ocr-translator/config"
+	"github.com/kujourinka/ocr-translator/ocr"
 	"github.com/kujourinka/ocr-translator/scanner"
 	"github.com/kujourinka/ocr-translator/translator"
-	"time"
 )
 
 type Engine struct {
@@ -17,12 +19,19 @@ type Engine struct {
 func NewEngine(cfg *config.RawConfig) (*Engine, error) {
 	c := &config.Config{}
 
+	var err error
+
+	c.OCR, err = ocr.NewGosseractOcr(cfg.OCR.Lang...)
+	if err != nil {
+		return nil, err
+	}
+
 	for _, t := range cfg.Translators {
 		switch t.Type {
 		case "google":
 			tl, err := translator.NewGoogleTranslator(
 				config.StrToLang(t.TargetLang),
-				config.StrToLang(t.SourceLang[0]),
+				config.StrToLang(t.SourceLang),
 				t.APIKey,
 			)
 			if err != nil {

@@ -95,11 +95,12 @@ Write config file, here's an example:
 ```yaml
 ocr:
   type: tesseract
+  lang:
+    - jpn
+    - eng
 translators:
   - type: google
     api: YOUR_GOOGLEAPI_KEY
     target: zh-chs
-    source:
-      - ja
-      - en
+    source: ja
 ```

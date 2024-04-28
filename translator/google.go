@@ -11,6 +11,8 @@ import (
 	"google.golang.org/api/option"
 )
 
+var _ Engine = (*GoogleTranslator)(nil)
+
 type GoogleTranslator struct {
 	client *translate.Client
 	apiKey string

@@ -6,6 +6,8 @@ import (
 	"github.com/kbinani/screenshot"
 )
 
+var _ Scanner = (*DefaultScanner)(nil)
+
 type DefaultScanner struct {
 	x      int
 	y      int
