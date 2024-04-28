@@ -25,6 +25,7 @@ type TranslatorConfig struct {
 	APIKey     string `yaml:"api"`
 	TargetLang string `yaml:"target"`
 	SourceLang string `yaml:"source"`
+	Socks5     string `yaml:"socks5"`
 }
 
 type Config struct {

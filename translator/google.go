@@ -5,9 +5,12 @@ package translator
 import (
 	"context"
 	"fmt"
+	"net/http"
 
 	"cloud.google.com/go/translate"
+	"golang.org/x/net/proxy"
 	"golang.org/x/text/language"
+	"google.golang.org/api/googleapi/transport"
 	"google.golang.org/api/option"
 )
 
@@ -16,17 +19,40 @@ var _ Engine = (*GoogleTranslator)(nil)
 type GoogleTranslator struct {
 	client *translate.Client
 	apiKey string
+	ctx    context.Context
 
 	targetLang language.Tag
 	sourceLang language.Tag
-	ctx        context.Context
+	proxy      string
 }
 
-func NewGoogleTranslator(target, source language.Tag, apiKey string) (*GoogleTranslator, error) {
+func NewGoogleTranslator(target, source language.Tag, apiKey, p string) (*GoogleTranslator, error) {
 	ctx := context.Background()
-	opt := []option.ClientOption{
-		option.WithAPIKey(apiKey),
-		// option.WithoutAuthentication(),
+	opt := make([]option.ClientOption, 0)
+
+	if p != "" {
+		socksProxyAddr := p
+
+		dialer, err := proxy.SOCKS5("tcp", socksProxyAddr, nil, proxy.Direct)
+		if err != nil {
+			return nil, err
+		}
+
+		httpClient := &http.Client{
+			Transport: &transport.APIKey{
+				Key: apiKey,
+				Transport: &http.Transport{
+					Dial: dialer.Dial,
+				},
+			},
+		}
+
+		opt = append(opt, option.WithHTTPClient(httpClient))
+	} else {
+		opt = append(opt,
+			option.WithAPIKey(apiKey),
+			// option.WithoutAuthentication(),
+		)
 	}
 
 	client, err := translate.NewClient(ctx, opt...)

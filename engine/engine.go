@@ -33,6 +33,7 @@ func NewEngine(cfg *config.RawConfig) (*Engine, error) {
 				config.StrToLang(t.TargetLang),
 				config.StrToLang(t.SourceLang),
 				t.APIKey,
+				t.Socks5,
 			)
 			if err != nil {
 				return nil, err

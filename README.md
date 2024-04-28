@@ -103,4 +103,5 @@ translators:
     api: YOUR_GOOGLEAPI_KEY
     target: zh-chs
     source: ja
+    socks5: "127.0.0.1:8888"
 ```

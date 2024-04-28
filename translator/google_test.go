@@ -11,7 +11,7 @@ const (
 )
 
 func TestGoogleTranslator(t *testing.T) {
-	gt, err := NewGoogleTranslator(language.SimplifiedChinese, language.Japanese, APIKey)
+	gt, err := NewGoogleTranslator(language.SimplifiedChinese, language.Japanese, APIKey, "")
 	if err != nil {
 		t.Fatal(err)
 	}
