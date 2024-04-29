@@ -110,18 +110,17 @@ func (e *Engine) Run() error {
 	}()
 
 	for {
+		time.Sleep(time.Millisecond * time.Duration(e.scanDelay))
 		// TODO: lots of things to do
 		img, err := e.scanner.Scan()
 		if err != nil {
 			fmt.Println(err)
-			time.Sleep(1 * time.Second)
 			continue
 		}
 
 		text, err := e.config.OCR.ImgToText(img)
 		if err != nil {
 			fmt.Println(err)
-			time.Sleep(1 * time.Second)
 			continue
 		}
 
@@ -131,15 +130,15 @@ func (e *Engine) Run() error {
 		}
 		lastText = text
 
+		fmt.Println(text, "->")
 		for _, tl := range e.config.Translators {
 			transText, err := tl.Translate(text)
 			if err != nil {
 				return err
 			}
-			fmt.Println(text, "->", transText)
+			fmt.Println(transText)
 		}
 
-		time.Sleep(time.Millisecond * time.Duration(e.scanDelay))
 	}
 	return nil
 }

@@ -17,7 +17,7 @@ type RawConfig struct {
 
 type OCRConfig struct {
 	Type      string   `yaml:"type"`
-	ScanDelay int      `yaml:"scan_delay"`
+	ScanDelay int      `yaml:"scan-delay"`
 	Lang      []string `yaml:"lang"`
 }
 
