@@ -16,8 +16,9 @@ type RawConfig struct {
 }
 
 type OCRConfig struct {
-	Type string   `yaml:"type"`
-	Lang []string `yaml:"lang"`
+	Type      string   `yaml:"type"`
+	ScanDelay int      `yaml:"scan_delay"`
+	Lang      []string `yaml:"lang"`
 }
 
 type TranslatorConfig struct {

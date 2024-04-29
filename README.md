@@ -95,6 +95,7 @@ Write config file, here's an example:
 ```yaml
 ocr:
   type: tesseract
+  scan-delay: 2000
   lang:
     - jpn
     - eng
